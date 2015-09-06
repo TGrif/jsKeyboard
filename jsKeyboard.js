@@ -63,6 +63,10 @@ window.onload = function() {
 
 
         
+        octaveShift = 0,
+        
+        nbOctaves = 4,
+        
         
         x = 40,
         
@@ -72,75 +76,87 @@ window.onload = function() {
         
         
         
+        for (var o = 0; o < nbOctaves; o++) {
         
         
-        for (var i = 0; i < touch.length; i++) {
+                if (o === nbOctaves - 1) {
+                    touch.push('L');
+                }
+        
+        
+        
+            for (var i = 0; i < touch.length; i++) {
 
 
-            if (touch[i].match(/^[A-Z]$/)) {    // match one char only
+                if (touch[i].match(/^[A-Z]$/)) {    // match one char only
 
 
 
-                    if (i === touch.length) {       // last white touch
-                       whiteTouchWidth = whiteTouchWidthAlone;
-                    }
+                        if (i === touch.length - 1 && o === nbOctaves - 1) {  // last white touch
+                           whiteTouchWidth = whiteTouchWidthAlone;
+                        }
 
 
 
 
-                whiteTouchlayer
-                    
-
-                        .append("rect")
-
-                            .attr("x", x * (i - j))
-                            .attr("y", 10)
-                            .attr("width", whiteTouchWidth)
-                            .attr("height", whiteTouchHeight)
-
-                            .attr("fill", "ivory")
-                            .attr("stroke-width", 1)
-                            .attr("stroke", "darkgray")
-
-                            .attr("id", touch[i]);
-               
-               
-               
-
-            } else {
-                
-                
-                
-                blackTouchlayer
+                    whiteTouchlayer
 
 
-                        .append("rect")
+                            .append("rect")
 
-                            .attr("x", (x * (i - j)) - blackTouchShift)
-                            .attr("y", 10)
-                            .attr("width", blackTouchWidth)
-                            .attr("height", blackTouchHeight)
+                                .attr("x",octaveShift + x * (i - j))
+                                .attr("y", 10)
+                                .attr("width", whiteTouchWidth)
+                                .attr("height", whiteTouchHeight)
 
-                            .attr("fill", "ebony")
-                            .attr("stroke-width", 1)
-                            .attr("stroke", "darkgray")
+                                .attr("fill", "ivory")
+                                .attr("stroke-width", 1)
+                                .attr("stroke", "darkgray")
 
-                            .attr("id", touch[i]);
-                    
-                    
-                   j++;
-             
-             
+                                .attr("id", touch[i] + '_' + octaves[o]);
+
+
+
+
+                } else {
+
+
+
+                    blackTouchlayer
+
+
+                            .append("rect")
+
+                                .attr("x",octaveShift + (x * (i - j)) - blackTouchShift)
+                                .attr("y", 10)
+                                .attr("width", blackTouchWidth)
+                                .attr("height", blackTouchHeight)
+
+                                .attr("fill", "ebony")
+                                .attr("stroke-width", 1)
+                                .attr("stroke", "darkgray")
+
+                                .attr("id", touch[i] + '_' + octaves[o]);
+
+
+                       j++;
+
+
+                }
+
+
+
             }
+            
 
+
+                octaveShift += 480;
 
 
         }
-
-
-
-
-
+        
+        
+        
 
 
                 var that, touchColor;
@@ -159,7 +175,7 @@ window.onload = function() {
                     that = d3.select(this);
             
                     touchColor = that.attr("fill");
-                    that.attr("fill", "orange");
+                    that.attr("fill", "#fbc97f");  // light orange
                     
                         // console.log(that.attr("id"));
                     
@@ -172,25 +188,18 @@ window.onload = function() {
                 })
                 
                 
-                
-                .on("dragstart", function(e) {
-                    console.log(e);
+        
+                .on("mousemove", function() {
+                    
+                    that = that || d3.select(this);
+                    touchColor = touchColor || that.attr("fill");
+                    that.attr("fill", touchColor);
+                    
                 });
+
     
     
     
     
-    
-   
 };
 
-
-
-
-/*
- * TODO 
- * 
- *  draw a perspective for black touch
- *  prevent dragging
- *  
- */
