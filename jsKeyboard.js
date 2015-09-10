@@ -18,7 +18,7 @@ window.onload = function() {
 
         var            
     
-    
+
             jsKeyboard = {},
             
             
@@ -51,15 +51,16 @@ window.onload = function() {
 
             whiteTouchHeight = 180,
             whiteTouchWidth = 40,
-            whiteTouchWidthAlone = whiteTouchWidth + 3,
+            whiteTouchWidthAlone = whiteTouchWidth + 1,
         
         
         
         
 
-                octaves = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+                octaves = octaves || [ /*1, 2,*/ 3, 4, 5, 6/*, 7, 8, 9, 10*/ ],  // 49 touch keyboard
                 
-                touch = [ 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B' ],
+                touch = touch || [ 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B' ],
+
 
 
         
@@ -80,7 +81,7 @@ window.onload = function() {
         
         
                 if (o === nbOctaves - 1) {
-                    touch.push('L');
+                    touch.push('L');   // last white touch (whiteTouchWidthAlone)
                 }
         
         
@@ -92,7 +93,7 @@ window.onload = function() {
 
 
 
-                        if (i === touch.length - 1 && o === nbOctaves - 1) {  // last white touch
+                        if (i === touch.length - 1 && o === nbOctaves - 1) {
                            whiteTouchWidth = whiteTouchWidthAlone;
                         }
 
@@ -113,7 +114,7 @@ window.onload = function() {
                                 .attr("stroke-width", 1)
                                 .attr("stroke", "darkgray")
 
-                                .attr("id", touch[i] + '_' + octaves[o]);
+                                .attr("id", touch[i] + octaves[o]);
 
 
 
@@ -136,7 +137,7 @@ window.onload = function() {
                                 .attr("stroke-width", 1)
                                 .attr("stroke", "darkgray")
 
-                                .attr("id", touch[i] + '_' + octaves[o]);
+                                .attr("id", touch[i] + octaves[o]);
 
 
                        j++;
@@ -157,6 +158,7 @@ window.onload = function() {
         
         
         
+        
 
 
                 var that, touchColor;
@@ -166,7 +168,11 @@ window.onload = function() {
 
 
 
-            d3.selectAll("rect")
+            d3
+            
+                    .selectAll("rect")
+            
+            
             
             
             
@@ -175,17 +181,24 @@ window.onload = function() {
                     that = d3.select(this);
             
                     touchColor = that.attr("fill");
-                    that.attr("fill", "#fbc97f");  // light orange
+                    that.attr("fill", "#fbc97f");   // light orange
                     
-                        // console.log(that.attr("id"));
                     
+                        play(that.attr("id"));
+                        
+
                   })
                   
                   
                   
+                  
                 .on("mouseup", function() {
+                    
                     that.attr("fill", touchColor);
+                    stop();
+                    
                 })
+                
                 
                 
         
