@@ -1,13 +1,8 @@
 /**
- *  jsKeyboardPlay
+ * jsKeyboard
+ *  jsPlay Keyboard Play
  *  
- * jsPlay keyboard sound
- *  
- *  
- * @author TGrif 2015 - MIT licence
- * 
- * @require AudioContext()
- * 
+ * @author TGrif 2015 - MIT licence 
  */
 
  

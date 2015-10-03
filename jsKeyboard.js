@@ -1,13 +1,8 @@
 /**
- *  jsKeyboard
- *  
- * jsPlay keyboard display 
- *  
+ * jsKeyboard
+ *  jsPlay Keyboard Display 
  *  
  * @author TGrif 2015 - MIT licence
- * 
- * @require D3.js
- * 
  */
 
 
