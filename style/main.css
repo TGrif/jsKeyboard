@@ -1,0 +1,12 @@
+
+ svg {
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+ }
+ 
+ rect:not(#gui) {
+     cursor: pointer;
+ } 
+
+ 
