@@ -10,101 +10,75 @@
 
 d3.select("body")
     .append('svg')
-        .attr({
-            id: "svg_gui",
-            width: 1415,
-            height: 250
-        })
+    .attr({
+        id: "svg_gui", width: 1415, height: 250
+    })
     .append("rect")
-        .attr({
-            id: "gui",
-            x: 0,
-            y: 0,
-            rx: 8,
-            ry: 8,
-            width: 1415,
-            height: 250,
-            fill: "black"
-        });
+    .attr({
+        id: "gui", width: 1415, height: 250, rx: 8, ry: 8, fill: "black"
+    });
 
 
   // pitch control
 
 d3.select("svg")
-    .append("g")
     .append("rect")
-        .attr({
-            x: 50,
-            y: 190,
-            rx: 8,
-            ry: 8,
-            width: 100,
-            height: 25,
-            fill: "orange"
-      });
+    .attr({
+        id: "ctrlPitch", x: 50, y: 190, rx: 8, ry: 8, width: 100, height: 25, fill: "orange"
+    });
 
 
   // btn control
   
 d3.select("svg")
-    .append('g')
     .append("rect")
-        .attr({
-            id: 'touch1',
-            x: 25,
-            y: 120,
-            rx: 8,
-            ry: 8,
-            width: 40,
-            height: 25,
-            fill: 'beige'
-        });
+    .attr({
+        id: 'ctrl1', x: 25, y: 120, rx: 8, ry: 8, width: 40, height: 25, fill: 'beige'
+    });
 
 
 d3.select("svg")
-    .append('g')
     .append("rect")
-        .attr({
-            id: 'touch2',
-            x: 80,
-            y: 120,
-            rx: 8,
-            ry: 8,
-            width: 40,
-            height: 25,
-            fill: 'beige'
-        });
+    .attr({
+        id: 'ctrl2', x: 80, y: 120, rx: 8, ry: 8, width: 40, height: 25, fill: 'beige'
+    });
 
 
 d3.select("svg")
-    .append('g')
     .append("rect")
-        .attr({
-            id: 'touch3',
-            x: 80,
-            y: 80,
-            rx: 8,
-            ry: 8,
-            width: 40,
-            height: 25,
-            fill: 'beige'
-        });
+    .attr({
+        id: 'ctrl3', x: 80, y: 80, rx: 8, ry: 8, width: 40, height: 25, fill: 'beige'
+    });
 
+
+  // screen
+/*  
+d3.select("svg")
+    .append("rect")
+    .attr({
+        id: 'screen', x: 210, y: 18, rx: 5, ry: 5, width: 450, height: 35, fill: 'lightblue'
+    });
+*/
+
+  // label
+  
+d3.select("svg")
+    .append("text")
+    .attr({
+        id: 'label', x: 1272, y: 38, 'font-style': 'italic', fill: 'lightgrey'
+    })
+    .text('jsKeyboard');
 
 
 var jsKeyboardContainer = d3.select("#svg_gui")
-    .append("g")
+    // .append("g")
     .append("svg")
-        .attr({
-            width: 1500,
-            height: 400,
-            x: 200,
-            y: 55
-        });
+    .attr({
+        width: 1500, height: 400, x: 200, y: 52
+    });
 
 
 
-// jsKeyboardContainer.append('g').append('rec').attr({ x: 50, y: 50, id: 'vol_knob', width: 200, height: 200, fill: 'red' });
 
 var whiteTouchlayer = jsKeyboardContainer.append('g');
 var blackTouchlayer = jsKeyboardContainer.append('g');
@@ -122,8 +96,8 @@ var whiteTouchWidthAlone = whiteTouchWidth + 1;
 var octaves = octaves || [ /*1, 2,*/ 3, 4, 5, 6/*, 7, 8, 9, 10*/ ];  // 49 touch keyboard
 
 // console.log(midiTool.NOTES)
-var touch = midiTool.NOTES;
-// var touch = touch || [ 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B' ];
+// var touch = midiTool.NOTES;
+var touch = [ 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B' ];
 
 var octaveShift = 0;
 var nbOctaves = 4;
@@ -151,13 +125,10 @@ for (var o = 0; o < nbOctaves; o++) {
       whiteTouchlayer.append("rect")
         .attr({
           id: touch[i] + octaves[o],
-          
           x: octaveShift + x * (i - j),
           y: 10,
-          
           width: whiteTouchWidth,
           height: whiteTouchHeight,
-          
           fill: 'ivory',
           'stroke-width': 1,
           stroke: 'darkgray'
@@ -166,16 +137,13 @@ for (var o = 0; o < nbOctaves; o++) {
     } else {
 
       blackTouchlayer.append("rect")
-
         .attr({
           id: touch[i] + octaves[o],
-          
           x: octaveShift + (x * (i - j)) - blackTouchShift,
           y: 10,
-          
           width: blackTouchWidth,
           height: blackTouchHeight,
-          
+          ry: 1,
           fill: 'ebony',
           'stroke-width': 1,
           stroke: 'darkgray'
@@ -192,7 +160,7 @@ for (var o = 0; o < nbOctaves; o++) {
 }
 
 
-var that, touchColor;
+var that, touchColor, key;
 
 
 d3.selectAll("rect")
@@ -204,19 +172,26 @@ d3.selectAll("rect")
     touchColor = that.attr("fill");
     that.attr("fill", "#fbc97f");   // light orange
     
-    play(that.attr("id"));
-    // console.log(that.attr("id"))
+    key = that.attr("id");
     
-    sendMsg('144', that.attr("id"))
+    if (key.indexOf('ctrl') === -1) {
+      play(key);
+      sendMsg('144', key);
+    } else {
+      console.log(key)
+      if (key = 'ctrl1') changeOSCType();
+    }
 
   })
   
   .on("mouseup", function() {
-    
     that.attr("fill", touchColor);
-    stop();
-    
-    sendMsg('128', that.attr("id"))
+    if (key.indexOf('ctrl') === -1) {
+      stop();
+      sendMsg('128', key);
+    } else {
+      console.log(key)
+    }
   })
   
   
@@ -225,14 +200,6 @@ d3.selectAll("rect")
     that = that || d3.select(this);
     touchColor = touchColor || that.attr("fill");
     that.attr("fill", touchColor);
-      
+    
   });
 
-
-    
-
-    // var el = document.getElementById('vol_knob');
-    // var dial = JogDial(el, {debug: true});
-    
-    
-// }
