@@ -48,6 +48,7 @@ function play(touch) {
     osc = audioContext.createOscillator();
     
     osc.frequency.value = frequency[touch];
+    // o.frequency.setTargetAtTime(Math.pow(2, (m-69)/12)*440, context.currentTime, 0);  // https://medium.com/swinginc/playing-with-midi-in-javascript-b6999f2913c3
     osc.type = oscActualType;
     
     osc.connect(volume);

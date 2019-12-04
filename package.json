@@ -1,0 +1,25 @@
+{
+  "name": "jskeyboard",
+  "author": "TGrif",
+  "version": "2.0.0",
+  "description": "JavaScript Keyboard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TGrif/jsKeyboard.git"
+  },
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --disable-gpu",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "midi": "^1.0.0"
+  },
+  "devDependencies": {
+    "electron": "^6.0.12",
+    "electron-builder": "^21.2.0"
+  }
+}
