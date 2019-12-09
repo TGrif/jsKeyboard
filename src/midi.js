@@ -1,15 +1,15 @@
 
+const { ipcRenderer } = require('electron');
 const midi = require('midi');
 
 const midiTool = require('./midi-tool');
+console.log(midi)
 
-
-// window && window.process && window.process.type
-// console.log(window.process.type)
-console.log(process.versions['electron'])
+const config = {};
 
 const input = new midi.Input();
 input.ignoreTypes(false, false, false);
+// console.log(input)
 
 input.openVirtualPort("jsKeyboard Virtual MIDI in");
 // input.openPort(0);
@@ -18,6 +18,7 @@ const output = new midi.Output();
 
 output.openVirtualPort("jsKeyboard Virtual MIDI out");
 // output.openPort(0);
+console.log(output)
 
 
 // console.log(midi);
@@ -25,24 +26,33 @@ const nbInputPort = input.getPortCount();
 console.log('___________________________________')
 console.log('Clients en lecture (' + nbInputPort + ')');
 
+config['Input'] = {};
+
 for (let i = 0; i < nbInputPort; i++) {
   console.log(input.getPortName(i));
+  config['Input'][i] = input.getPortName(i);
 }
 
 const nbOutputPort = output.getPortCount();
 console.log('___________________________________')
 console.log('Clients en ecriture (' + nbOutputPort + ')');
 
+config['Output'] = {};
+
 for (let i = 0; i < nbOutputPort; i++) {
   console.log(output.getPortName(i));
+  config['Output'][i] = output.getPortName(i);
 }
 
+ipcRenderer.send('setMidiConfig', config);
 
 
 
 function sendMsg(channel, note) {
-  console.log('Send a MIDI message:', channel, note)
+  ipcRenderer.send('updateLog', 'Send a MIDI message: ' + channel + ' ' + note);
+  // console.log('Send a MIDI message:', channel, note)
   // console.log(midiTool.note_to_MIDI(note, 1, -1))
+  console.log(note);
   output.sendMessage([channel, midiTool.note_to_MIDI(note), 80]);
 }
 
@@ -59,16 +69,22 @@ input.on('message', (deltaTime, message) => {
   console.log(midiTool.MIDI_to_note(message[1]))
 });
 
+// output.on('message', (deltaTime, message) => {
+//   console.log('->', message)
+// });
 
 // ... receive MIDI messages ...
 
 // Close the port when done.
 setTimeout(function() {
-  input.closePort();
-  // Close the port when done.
-  output.closePort();
+  midiCleanUp()
 }, 100000);
 
+
+function midiCleanUp() {
+  input.closePort();
+  output.closePort();
+}
 
 
 

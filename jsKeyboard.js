@@ -70,6 +70,14 @@ d3.select("svg")
     .text('jsKeyboard');
 
 
+// d3.select("svg")
+//     .append("text")
+//     .attr({
+//         id: 'f', x: 205, y: 53, fill: 'lightgrey', 'font-size': 10
+//     })
+//     .text('panic');
+        
+        
 var jsKeyboardContainer = d3.select("#svg_gui")
     // .append("g")
     .append("svg")
