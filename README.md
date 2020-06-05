@@ -12,7 +12,9 @@ npm start
 
 ### jackd
 
-jackd post start script: a2jmidid -e &  // https://linuxmusicians.com/viewtopic.php?t=17074
+jackd post start script: a2jmidid -e &
+
+#### source: https://linuxmusicians.com/viewtopic.php?t=17074
 
 
 
