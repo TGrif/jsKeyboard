@@ -1,11 +1,3 @@
-/**
- * jsKeyboard
- *   Web Audio Keyboard
- *  
- * TGrif 2015 - MIT licence 
- */
-
-
 var audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 var osc;
