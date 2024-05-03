@@ -2,14 +2,13 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
 
 const appVersion = process.env.npm_package_version;
-
 const appIcon = path.join(__dirname, 'src/img/jsKeyboard.png');
 
 
 function createWindow() {
 
   let masterWindow = new BrowserWindow({
-    width: 1850,
+    width: 1650,
     height: 300,
     webPreferences: {
       nodeIntegration: true
