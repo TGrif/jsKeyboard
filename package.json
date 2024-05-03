@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/TGrif/jsKeyboard.git"
   },
-  "main": "main.js",
+  "main": "main.cjs",
   "scripts": {
     "start": "electron . --in-process-gpu",
     "postinstall": "electron-builder install-app-deps",
