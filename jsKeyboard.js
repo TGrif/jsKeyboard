@@ -27,12 +27,16 @@ d3.select("svg")
         id: "ctrlPitch", x: 50, y: 190, rx: 8, ry: 8, width: 100, height: 25, fill: "orange"
     });
 
-// d3.select("svg")
-//     .append("g")
-//     .append("svg:image")
-//     .attr({
-//         id: "ctrlPitch", x: 50, y: 190, rx: 8, ry: 8, width: 100, height: 25, "xlink:href": "src/img/modulation_wheel By Aviram Dayan-DreaMelodiC.png"
-//     });
+
+  // modulation wheel (TODO)
+/*
+d3.select("svg")
+    .append("g")
+    .append("svg:image")
+    .attr({  // FIXME modulation_wheel.png doesn't exists
+        id: "ctrlPitch", x: 50, y: 190, rx: 8, ry: 8, width: 100, height: 25, "xlink:href": "src/img/modulation_wheel.png"
+    });
+*/
 
 
   // btn control
@@ -58,7 +62,7 @@ d3.select("svg")
     });
 
 
-  // screen
+  // screen (TODO)
 /*  
 d3.select("svg")
     .append("rect")
@@ -77,13 +81,15 @@ d3.select("svg")
     .text('jsKeyboard');
 
 
-// d3.select("svg")
-//     .append("text")
-//     .attr({
-//         id: 'f', x: 205, y: 53, fill: 'lightgrey', 'font-size': 10
-//     })
-//     .text('panic');
-
+  // submenu keys (TODO)
+/*
+d3.select("svg")
+    .append("text")
+    .attr({
+        id: 'f', x: 205, y: 53, fill: 'lightgrey', 'font-size': 10
+    })
+    .text('panic');
+*/
 
 var jsKeyboardContainer = d3.select("#svg_gui")
     // .append("g")
@@ -91,7 +97,6 @@ var jsKeyboardContainer = d3.select("#svg_gui")
     .attr({
         width: 1500, height: 400, x: 200, y: 52
     });
-
 
 
 
