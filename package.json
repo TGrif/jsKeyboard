@@ -19,6 +19,6 @@
   "dependencies": {
     "midi": "^1.0.0",
     "electron": "^9.1.0",
-    "electron-builder": "^21.2.0"
+    "electron-builder": "^24.13.3"
   }
 }
