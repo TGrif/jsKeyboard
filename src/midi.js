@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 const midi = require('midi');
+// console.log(midi)
 
 const midiTool = require('./midi-tool');
-// console.log(midi)
 
 const config = {};
 
@@ -20,7 +20,6 @@ output.openVirtualPort("jsKeyboard Virtual MIDI out");
 // console.log(output)
 
 
-// console.log(midi);
 const nbInputPort = input.getPortCount();
 console.log('___________________________________')
 console.log('Clients en lecture (' + nbInputPort + ')');
