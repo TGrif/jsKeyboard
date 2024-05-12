@@ -1,11 +1,13 @@
 # jsKeyboard
 
+A d3 & electron midi keyboard  
+* jackd support
+* midi log
 
 
 ### electron app
 
-npm start
-
+npm install && npm start
 
 
 ### jackd
@@ -24,3 +26,5 @@ Initial browser version
 2.0.0
 Electron version
 
+3.0
+Stable version
